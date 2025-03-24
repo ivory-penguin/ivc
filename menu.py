@@ -262,11 +262,10 @@ def RollbackProject(args = None):
         }
 
         # we make a copy to iterate through here
-        for version in [key for key in valid_inputs.keys()]:
-            with open(f"VC data/{current_project}/{version}/Version Metadata.json") as file:
+        for key in [key for key in valid_inputs.keys()]:
+            with open(f"VC data/{current_project}/{key}/Version Metadata.json") as file:
                 data = json.loads(file.read())
-                valid_inputs[data["version name"]] = version
-
+                valid_inputs[data["version name"]] = key
         # input validation
         while not version in valid_inputs.keys():
             if not args:
@@ -274,6 +273,9 @@ def RollbackProject(args = None):
             else:
                 print(f"version not recognised. try running 'ivc tree {current_project}' to check what versions are recognised")
                 quit()
+        print(valid_inputs)
+        print(version)
+
         version = valid_inputs[version]
 
         # actually do the rollback
