@@ -260,7 +260,6 @@ def RollbackProject(args = None):
         valid_inputs = {
             f'V{str(i+1).zfill(4)}' : f'V{str(i+1).zfill(4)}' for i in range(highest_version)
         }
-        print(valid_inputs)
 
         # we make a copy to iterate through here
         for version in [key for key in valid_inputs.keys()]:
@@ -268,6 +267,7 @@ def RollbackProject(args = None):
                 data = json.loads(file.read())
                 valid_inputs[data["version name"]] = version
                 
+        print(valid_inputs)
 
         # input validation which can be ignored
         while not version in valid_inputs.keys():
@@ -279,7 +279,7 @@ def RollbackProject(args = None):
         version = valid_inputs[version]
 
         # actually do the rollback
-        if file_operations.RollbackVersion(current_project, f'V{str(version).zfill(4)}'):
+        if file_operations.RollbackVersion(current_project, version):
             if not args:
                 input("version rolled back successfully! press enter to return to the menu. ")
         else:
