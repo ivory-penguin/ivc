@@ -95,7 +95,7 @@ def BackupVersion(project_name, version_name, description):
     # increment the version and write it back to the project metadata
     project_metadata["current hash"] = project_metadata["next hash"]
     project_metadata["next hash"] = f'V{str(int(current_version[1:]) + 1).zfill(4)}'
-    project_metadata["latest hash"] = project_metadata["next hash"]
+    project_metadata["latest hash"] = project_metadata["current hash"]
 
     new_metadata = json.dumps(project_metadata)
     with open(f'VC data/{project_name}/Project Metadata.json', 'w') as file:
