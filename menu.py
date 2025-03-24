@@ -256,7 +256,7 @@ def RollbackProject(args = None):
             version = input("which version would you like to roll back to? enter the version number (e.g V0012) or the version name: ")
         else:
             version = args.version
-            
+
         valid_inputs = {
             f'V{str(i+1).zfill(4)}' : f'V{str(i+1).zfill(4)}' for i in range(highest_version)
         }
@@ -270,27 +270,13 @@ def RollbackProject(args = None):
                 
 
         # input validation which can be ignored
-        while True:
-            valid = True
-            if len(version) == 0:
-                valid = False
-            elif version[0] == 'V' and version[1:].isdigit():
-                version = int(version[1:])
-            elif version.isdigit():
-                version = int(version)
-
-            if valid and (version > highest_version or version < 0):
-                valid = False
-
-            if not valid:
-                if not args:
-                    version = input("please re-enter the version: ")
-                else:
-                    print(f"version not recognised. try running 'ivc tree {current_project}' to check what versions are recognised")
-                    quit()
+        while not version in valid_inputs.keys():
+            if not args:
+                version = input("please re-enter the version: ")
             else:
-                break
-
+                print(f"version not recognised. try running 'ivc tree {current_project}' to check what versions are recognised")
+                quit()
+        
         # actually do the rollback
         if file_operations.RollbackVersion(current_project, f'V{str(version).zfill(4)}'):
             if not args:
