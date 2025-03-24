@@ -253,9 +253,21 @@ def RollbackProject(args = None):
 
         if not args:
             DisplayTree()
-            version = input("which version would you like to roll back to? ")
+            version = input("which version would you like to roll back to? enter the version number (e.g V0012) or the version name: ")
         else:
             version = args.version
+        
+        valid_inputs = {
+            f'V{str(i+1).zfill(4)}' : f'V{str(i+1).zfill(4)}' for i in range(highest_version)
+        }
+        print(valid_inputs)
+
+        # we make a copy to iterate through here
+        for version in [key for key in valid_inputs.keys()]:
+            with open(f"VC data/{current_project}/{version}/Version Metadata.json") as file:
+                data = json.loads(file.read())
+                valid_inputs[data["version name"]] = version
+                
 
         # input validation which can be ignored
         while True:
