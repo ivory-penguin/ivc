@@ -1,3 +1,10 @@
+"""
+during development you can run:
+pwsh:   function ivc { py main.py @args }
+debian: alias ivc="python-3 main.py"
+in pwsh in the root dir to setup the CLI correctly
+"""
+
 import argparse
 import menu
 
