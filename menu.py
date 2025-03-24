@@ -276,7 +276,8 @@ def RollbackProject(args = None):
             else:
                 print(f"version not recognised. try running 'ivc tree {current_project}' to check what versions are recognised")
                 quit()
-        
+        version = valid_inputs[version]
+
         # actually do the rollback
         if file_operations.RollbackVersion(current_project, f'V{str(version).zfill(4)}'):
             if not args:
