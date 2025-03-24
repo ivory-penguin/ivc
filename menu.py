@@ -266,10 +266,8 @@ def RollbackProject(args = None):
             with open(f"VC data/{current_project}/{version}/Version Metadata.json") as file:
                 data = json.loads(file.read())
                 valid_inputs[data["version name"]] = version
-                
-        print(valid_inputs)
 
-        # input validation which can be ignored
+        # input validation
         while not version in valid_inputs.keys():
             if not args:
                 version = input("please re-enter the version: ")

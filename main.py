@@ -36,11 +36,13 @@ if __name__ == "__main__":
     GUI_parser = sub_parsers.add_parser("GUI", usage="ivc GUI", help="loads into the GUI version of ivc")
     GUI_parser.set_defaults(func=menu.MainLoop)
 
-    list_parser = sub_parsers.add_parser("list", usage="ivc list", help="list recognized projects")
+    list_parser = sub_parsers.add_parser("list", usage="ivc list", help="list recognized projects or information about versions")
+    list_parser.add_argument("-v", "--version", help="lists information about the specified project version. requires 2 aruments (ivc list -v [project] [version]", nargs=2)
     list_parser.set_defaults(func=menu.ListProjects)
 
     args = parser.parse_args()
 
+    # default case we load into GUI
     if not hasattr(args, "func"):
         menu.MainLoop()
         quit()
@@ -70,7 +72,8 @@ ivc [function] [project] [parameters]
 : create      : ivc create [project] [root dir]                   : Creates a project under the specified alias name in the directory and creates an empty V0001                                                                                                      :
 : tree        : ivc tree [project]                                : Displays the version tree for the selected project                                                                                                                                                :
 : GUI         : ivc GUI                                           : Loads into the ivc GUI version                                                                                                                                                                    :
-: list        : ivc list                                          : Lists recognized projects                                                                                                                                                                         :
+: list        : ivc list [-v project version]                     : Lists recognized projects, or lists the information on project version such as name and description                                                                                               :
+: remove      : ivc remove [project]                              : removes the project from ivc, deleting all backups and removing it from the project list                                                                                                          :
 :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:
 
 """
