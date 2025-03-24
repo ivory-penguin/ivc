@@ -273,8 +273,6 @@ def RollbackProject(args = None):
             else:
                 print(f"version not recognised. try running 'ivc tree {current_project}' to check what versions are recognised")
                 quit()
-        print(valid_inputs)
-        print(version)
 
         version = valid_inputs[version]
 
