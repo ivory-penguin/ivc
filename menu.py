@@ -318,9 +318,25 @@ def CreateNewProject(args = None):
     return
 
 def ListProjects(args = None):
-    with open("VC data/projects.txt") as file:
-        for line in file.readlines():
-            print(line.split("|")[0])
+    if not hasattr(args, "version"):
+        # list projects
+        with open("VC data/projects.txt") as file:
+            for line in file.readlines():
+                print(line.split("|")[0])
+    else:
+        # list version info
+        try:
+            with open(f"VC data/{args.version[0]}/{args.version[1]}/Version Metadata.json") as file:
+                data = json.loads(file.read())
+                print(f"Version Name:       {data['version name']}")
+                print(f"Decription:         {data['description']}")
+                print(f"Version Code:       {data['hash']}")
+                print(f"No. Child Versions: {len(data['backed up files'])}")
+                print(f"Stored Files:       ", end="")
+                for file in data["backed up files"]:
+                    print(file)
+        except FileNotFoundError:
+            print("Could not find the specified version. Check over your input")
 
 if __name__ == "__main__":
     Init()
