@@ -24,11 +24,12 @@ def MainLoop(args = None):
             lambda: RollbackProject(),
             lambda: CreateNewProject(),
             lambda: DisplayTree(blocking=True),
+            lambda: RemoveProject()
         ]
         option = DisplayMenu()
-        if option in (1,2,3,4,5):
+        if option in (1,2,3,4,5,6):
             options[option-1]()
-        elif option == 6:
+        elif option == 7:
             break
         else:
             print("somehow DisplayMenu returned an unknown value. Fix your stupid program please")
@@ -45,10 +46,11 @@ currently active project: {current_project}
 3. load a different project version
 4. create a new project
 5. view project history tree
-6. close ivc
+6. delete the current project
+7. close ivc
 enter a number: """, end="")
     option = input()
-    while not option.isdigit() or int(option) > 6 or int(option) < 1:
+    while not option.isdigit() or int(option) > 7 or int(option) < 1:
         return int(DisplayMenu())
     return int(option)
 
@@ -337,6 +339,13 @@ def ListProjects(args = None):
                     print(file)
         except FileNotFoundError:
             print("Could not find the specified version. Check over your input")
+
+def RemoveProject(args = None):
+    valid = input(f"are you sure that you want to delete {current_project}? this cannot be undone. enter 'no' to cancel: ").lower().strip()
+    if valid == "no":
+        print("aborting deletion.")
+        return
+    file_operations.RemoveProject(current_project)
 
 if __name__ == "__main__":
     Init()

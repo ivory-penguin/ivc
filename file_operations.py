@@ -393,5 +393,24 @@ def RollbackVersion(project_name, version_hash):
         print("please copy or move the file into the live version, delete your current files and unzip the archive to complete the rollback")
         return False
 
-if __name__ == "__main__":
-    RollbackVersion("test 21", "V0007")
+def RemoveProject(project):
+    # remove the version metadata
+    shutil.rmtree(f"VC data/{project}")
+
+    # update projects.txt
+    with open("VC data/projects.txt", 'r') as file:
+        data = file.readlines()
+    with open("VC data/projects.txt", 'w') as file:
+        for line in data:
+            if line.split('|')[0] != project:
+                file.write(line)
+    
+    # update cached info to not default to a nonexistent version
+    if open("cached info/previous session.txt").readlines()[0] == project:
+        with open("cached info/previous session.txt", 'r') as file:
+            data = file.readlines()
+        data[0] = ""
+        with open("cached info/previous session.txt", 'w') as file:
+            for line in data:
+                file.write(line)
+    

@@ -40,6 +40,10 @@ if __name__ == "__main__":
     list_parser.add_argument("-v", "--version", help="lists information about the specified project version. requires 2 arguments (ivc list -v [project] [version])", nargs=2)
     list_parser.set_defaults(func=menu.ListProjects)
 
+    remove_parser = sub_parsers.add_parser("remove", usage="ivc remove [project]", help="removes a project and all relevant versions from ivc")
+    remove_parser.add_argument("project", help="the project that you want to remove")
+    remove_parser.set_defaults(func=menu.RemoveProject)
+
     args = parser.parse_args()
 
     # default case we load into GUI
