@@ -60,7 +60,6 @@ if __name__ == "__main__":
             else:
                 print(f"{args.project} is not recognized. ")
                 quit()
-    print(args)
     args.func(args=args)
 
 

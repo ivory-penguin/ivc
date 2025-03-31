@@ -3,6 +3,7 @@ import file_operations
 import json
 import tkinter
 from tkinter import filedialog
+import re
 tkinter.Tk().withdraw() # prevents an empty tkinter window from appearing
 
 current_project = "None"
@@ -328,6 +329,25 @@ def ListProjects(args = None):
     else:
         # list version info
         try:
+            # check if we've got a version number or a name
+            if not re.search("V\d\d\d\d", args.version[1]):
+                # if we have a version name, convert to version number
+                # to do this, unfortuantely the fasest way is to just check every version
+                with open(f'VC data/{args.version[0]}/Project Metadata.json') as file:
+                    max_version = json.loads(file.read())["latest hash"]
+                max_version = int(max_version[1:])
+                
+                for i in range(max_version):
+                    version = 'V' + str(i+1).zfill(4)
+
+                    with open(f"VC data/{args.version[0]}/{version}/Version Metadata.json") as file:
+                        data = json.loads(file.read())
+
+                        if data["version name"] == args.version[1]:
+                            args.version[1] = data["hash"]
+                            break
+
+
             with open(f"VC data/{args.version[0]}/{args.version[1]}/Version Metadata.json") as file:
                 data = json.loads(file.read())
                 print(f"Version Name:       {data['version name']}")
@@ -346,6 +366,9 @@ def RemoveProject(args = None):
         print("aborting deletion.")
         return
     file_operations.RemoveProject(current_project)
+    print("project deleted successfully")
+    if not args:
+        input("press enter to return to the menu")
 
 if __name__ == "__main__":
     Init()
