@@ -7,12 +7,14 @@ in pwsh in the root dir to setup the CLI correctly
 
 import argparse
 import menu
+import os
 
 if __name__ == "__main__":
     # first run logic
     try:
         open("firstrun", 'r').close()
     except FileNotFoundError:
+        os.mkdir("VC data")
         open("firstrun", 'w').close()
         open("VC data/projects.txt", 'w').close()
     # figuring out args
