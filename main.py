@@ -7,16 +7,14 @@ in pwsh in the root dir to setup the CLI correctly
 
 import argparse
 import menu
-import os
+import firstrun
 
 if __name__ == "__main__":
     # first run logic
     try:
         open("firstrun", 'r').close()
     except FileNotFoundError:
-        os.mkdir("VC data")
-        open("firstrun", 'w').close()
-        open("VC data/projects.txt", 'w').close()
+        firstrun.Init()
     # figuring out args
     parser = argparse.ArgumentParser("ivc", description="Ivc is a version control system designed to be simple to use, but providing deeper functionality and using minimal storage space. Also I needed some more projects to put on a portfolio so here we are", usage="ivc [FUNCTION] [PARAMETERS]")
     sub_parsers = parser.add_subparsers(title="Options")

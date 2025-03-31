@@ -1,0 +1,5 @@
+__init__.py
+cached info\previous session.txt
+cached info\reconstructed file
+VC data\projects.txt
+cached info\reconstructed version

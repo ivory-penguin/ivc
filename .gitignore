@@ -2,6 +2,8 @@
 VC data/*
 .vscode
 firstrun
+debug project example thing/
+VC Filsystem model.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
