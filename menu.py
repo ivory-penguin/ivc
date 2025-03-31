@@ -362,8 +362,8 @@ def ListProjects(args = None):
             print("Could not find the specified version. Check over your input")
 
 def RemoveProject(args = None):
-    valid = input(f"are you sure that you want to delete {current_project}? this cannot be undone. enter 'no' to cancel: ").lower().strip()
-    if valid == "no":
+    valid = input(f"are you sure that you want to delete {current_project}? this cannot be undone. enter 'YES' to confirm: ").lower().strip()
+    if valid != "YES":
         print("aborting deletion.")
         return
     file_operations.RemoveProject(current_project)
