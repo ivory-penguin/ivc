@@ -404,7 +404,7 @@ def RemoveProject(project):
         for line in data:
             if line.split('|')[0] != project:
                 file.write(line)
-    
+
     # update cached info to not default to a nonexistent version
     if open("cached info/previous session.txt").readlines()[0] == project:
         with open("cached info/previous session.txt", 'r') as file:
@@ -413,4 +413,3 @@ def RemoveProject(project):
         with open("cached info/previous session.txt", 'w') as file:
             for line in data:
                 file.write(line)
-    

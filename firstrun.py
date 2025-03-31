@@ -8,7 +8,7 @@ def CreateFilesAndDirs():
                     open(path, 'r').close()
                 except FileNotFoundError:
                     open(path, 'w').close()
-                
+
             else:
                 # if a dir, try mkdir
                 try:
@@ -18,6 +18,5 @@ def CreateFilesAndDirs():
 
 def Init():
     CreateFilesAndDirs()
-    
+
     open("firstrun", 'w').close()
-    

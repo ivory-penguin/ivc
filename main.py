@@ -56,7 +56,7 @@ if __name__ == "__main__":
     if not hasattr(args, "func"):
         menu.MainLoop()
         quit()
-    
+
     if hasattr(args, "project") and args.func != menu.CreateNewProject:
         menu.current_project = args.project
         with open("VC data/projects.txt") as file:
