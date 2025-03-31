@@ -336,13 +336,14 @@ def ListProjects(args = None):
                 with open(f'VC data/{args.version[0]}/Project Metadata.json') as file:
                     max_version = json.loads(file.read())["latest hash"]
                 max_version = int(max_version[1:])
-                
+
+                # go through each version and read the data
                 for i in range(max_version):
                     version = 'V' + str(i+1).zfill(4)
-
                     with open(f"VC data/{args.version[0]}/{version}/Version Metadata.json") as file:
                         data = json.loads(file.read())
 
+                        # if it's the right version, get the hash and continue as though the version number was inputed instead of name
                         if data["version name"] == args.version[1]:
                             args.version[1] = data["hash"]
                             break

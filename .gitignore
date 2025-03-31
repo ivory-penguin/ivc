@@ -1,7 +1,7 @@
 # ivc specifics (all else is default python template)
 VC data/*
-!VC data/projects.txt
 .vscode
+firstrun
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
