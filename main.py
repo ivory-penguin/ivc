@@ -3,6 +3,8 @@ during development you can run:
 pwsh:   function ivc { py main.py @args }
 debian: alias ivc="python-3 main.py"
 in pwsh in the root dir to setup the CLI correctly
+
+also this file is more accurately a CLI parser rather than a main program
 """
 
 import argparse
@@ -86,4 +88,12 @@ ivc [function] [project] [parameters]
 : remove      : ivc remove [project]                              : removes the project from ivc, deleting all backups and removing it from the project list                                                                                                          :
 :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:
 
+TODO:
+- GUI
+- less bad TUI (curses?)
+- docker integration
+- package managers
+- encryption
+- proper hashing over version numbers
+- Google Drive API (major issues with rate limiting?) (please don't setup google cloud in college, they'll be able to see your bank information. API should be fine to use)
 """
